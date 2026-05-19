@@ -1,0 +1,31 @@
+modLoader="javafml"
+loaderVersion="[4,)"
+license="CC0-1.0"
+issueTrackerURL="https://github.com/kestalkayden/weeping-creeper-lite/issues"
+
+[[mods]]
+modId="weepingcreeperlite"
+version="${version}"
+displayName="Weeping Creeper"
+description='''
+Creepers that freeze when you look at them, move faster when you don't, and only damage players (not terrain) when they explode.
+'''
+authors="Kestalkayden"
+displayURL="https://github.com/kestalkayden/weeping-creeper-lite"
+
+[[mixins]]
+config="weepingcreeperlite.mixins.json"
+
+[[dependencies.weepingcreeperlite]]
+modId="neoforge"
+type="required"
+versionRange="[26.1,)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.weepingcreeperlite]]
+modId="minecraft"
+type="required"
+versionRange="[26.1,26.2)"
+ordering="NONE"
+side="BOTH"

@@ -1,0 +1,37 @@
+# gradle
+
+.gradle/
+build/
+out/
+classes/
+
+# eclipse
+
+*.launch
+
+# idea
+
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# vscode
+
+.settings/
+.vscode/
+bin/
+.classpath
+.project
+
+# fabric / neoforge
+
+run/
+
+# claude code harness state
+
+.claude/
+
+# local design notes — kept on disk, not committed
+
+TODO/

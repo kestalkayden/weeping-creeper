@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "package": "com.kestalkayden.weepingcreeperlite.mixin",
+  "compatibilityLevel": "JAVA_22",
+  "minVersion": "0.8",
+  "mixins": [
+    "CreeperTickMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
