@@ -1,4 +1,4 @@
-package com.kestalkayden.weepingcreeperlite.client;
+package com.kestalkayden.weepingcreeper.client;
 
 import net.minecraft.client.renderer.entity.CreeperRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;

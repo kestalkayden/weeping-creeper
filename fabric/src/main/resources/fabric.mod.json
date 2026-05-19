@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "id": "weepingcreeperlite",
+  "id": "weepingcreeper",
   "version": "${version}",
   "name": "Weeping Creeper",
   "description": "Creepers that freeze when you look at them, move faster when you don't, and only damage players (not terrain) when they explode.",
@@ -8,21 +8,21 @@
     "Kestalkayden"
   ],
   "contact": {
-    "homepage": "https://github.com/kestalkayden/weeping-creeper-lite",
-    "sources": "https://github.com/kestalkayden/weeping-creeper-lite"
+    "homepage": "https://github.com/kestalkayden/weeping-creeper",
+    "sources": "https://github.com/kestalkayden/weeping-creeper"
   },
   "license": "CC0-1.0",
   "environment": "*",
   "entrypoints": {
     "main": [
-      "com.kestalkayden.weepingcreeperlite.WeepingCreeperFabric"
+      "com.kestalkayden.weepingcreeper.WeepingCreeperFabric"
     ],
     "client": [
-      "com.kestalkayden.weepingcreeperlite.client.WeepingCreeperClient"
+      "com.kestalkayden.weepingcreeper.client.WeepingCreeperClient"
     ]
   },
   "mixins": [
-    "weepingcreeperlite.mixins.json"
+    "weepingcreeper.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=0.18.4",

@@ -1,6 +1,6 @@
-package com.kestalkayden.weepingcreeperlite.entity;
+package com.kestalkayden.weepingcreeper.entity;
 
-import com.kestalkayden.weepingcreeperlite.WeepingCreeperFabric;
+import com.kestalkayden.weepingcreeper.WeepingCreeperFabric;
 
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.minecraft.core.registries.BuiltInRegistries;

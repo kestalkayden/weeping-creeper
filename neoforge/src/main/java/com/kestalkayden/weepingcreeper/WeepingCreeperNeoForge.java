@@ -1,12 +1,12 @@
-package com.kestalkayden.weepingcreeperlite;
+package com.kestalkayden.weepingcreeper;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.kestalkayden.weepingcreeperlite.client.WeepingCreeperClient;
-import com.kestalkayden.weepingcreeperlite.config.ModConfig;
-import com.kestalkayden.weepingcreeperlite.entity.WeepingCreeperEntities;
-import com.kestalkayden.weepingcreeperlite.entity.WeepingCreeperEntity;
+import com.kestalkayden.weepingcreeper.client.WeepingCreeperClient;
+import com.kestalkayden.weepingcreeper.config.ModConfig;
+import com.kestalkayden.weepingcreeper.entity.WeepingCreeperEntities;
+import com.kestalkayden.weepingcreeper.entity.WeepingCreeperEntity;
 
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntitySpawnReason;
@@ -22,7 +22,7 @@ import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 
 @Mod(WeepingCreeperNeoForge.MOD_ID)
 public class WeepingCreeperNeoForge {
-    public static final String MOD_ID = "weepingcreeperlite";
+    public static final String MOD_ID = "weepingcreeper";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
     public WeepingCreeperNeoForge(IEventBus modBus) {

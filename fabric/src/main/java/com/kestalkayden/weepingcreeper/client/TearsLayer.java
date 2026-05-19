@@ -1,7 +1,7 @@
-package com.kestalkayden.weepingcreeperlite.client;
+package com.kestalkayden.weepingcreeper.client;
 
-import com.kestalkayden.weepingcreeperlite.WeepingCreeperNeoForge;
-import com.kestalkayden.weepingcreeperlite.config.ModConfig;
+import com.kestalkayden.weepingcreeper.WeepingCreeperFabric;
+import com.kestalkayden.weepingcreeper.config.ModConfig;
 import com.mojang.blaze3d.vertex.PoseStack;
 
 import net.minecraft.client.model.monster.creeper.CreeperModel;
@@ -12,9 +12,11 @@ import net.minecraft.client.renderer.entity.state.CreeperRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.Identifier;
 
+/** Draws the tears overlay on top of the vanilla creeper texture. Toggled live via
+ *  {@link ModConfig#tearsEnabled} — no resource reload needed. */
 public class TearsLayer extends RenderLayer<CreeperRenderState, CreeperModel> {
     private static final Identifier TEARS = Identifier.fromNamespaceAndPath(
-        WeepingCreeperNeoForge.MOD_ID, "textures/entity/tears.png");
+        WeepingCreeperFabric.MOD_ID, "textures/entity/tears.png");
 
     public TearsLayer(RenderLayerParent<CreeperRenderState, CreeperModel> parent) {
         super(parent);

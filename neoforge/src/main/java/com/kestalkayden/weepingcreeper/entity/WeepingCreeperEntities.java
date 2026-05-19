@@ -1,6 +1,6 @@
-package com.kestalkayden.weepingcreeperlite.entity;
+package com.kestalkayden.weepingcreeper.entity;
 
-import com.kestalkayden.weepingcreeperlite.WeepingCreeperNeoForge;
+import com.kestalkayden.weepingcreeper.WeepingCreeperNeoForge;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;

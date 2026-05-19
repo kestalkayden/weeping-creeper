@@ -1,4 +1,4 @@
-package com.kestalkayden.weepingcreeperlite.config;
+package com.kestalkayden.weepingcreeper.config;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -11,14 +11,14 @@ import com.google.gson.JsonSyntaxException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/** JSON config at config/weepingcreeperlite.json. Default behaviour: every vanilla
+/** JSON config at config/weepingcreeper.json. Default behaviour: every vanilla
  *  creeper spawn becomes a weeping creeper; cosmetic tears overlay enabled. Server
  *  owners dial down replacementChance for a hybrid world, or set 0 to spawn weeping
  *  creepers only via spawn eggs. */
 public final class ModConfig {
-    private static final Logger LOGGER = LoggerFactory.getLogger("weepingcreeperlite");
+    private static final Logger LOGGER = LoggerFactory.getLogger("weepingcreeper");
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
-    private static final String FILE_NAME = "weepingcreeperlite.json";
+    private static final String FILE_NAME = "weepingcreeper.json";
 
     private static ModConfig INSTANCE = new ModConfig();
 

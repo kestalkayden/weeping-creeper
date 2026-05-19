@@ -1,6 +1,6 @@
-package com.kestalkayden.weepingcreeperlite.client;
+package com.kestalkayden.weepingcreeper.client;
 
-import com.kestalkayden.weepingcreeperlite.entity.WeepingCreeperEntities;
+import com.kestalkayden.weepingcreeper.entity.WeepingCreeperEntities;
 
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 

@@ -1,11 +1,11 @@
-package com.kestalkayden.weepingcreeperlite;
+package com.kestalkayden.weepingcreeper;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.kestalkayden.weepingcreeperlite.config.ModConfig;
-import com.kestalkayden.weepingcreeperlite.entity.WeepingCreeperEntities;
-import com.kestalkayden.weepingcreeperlite.entity.WeepingCreeperEntity;
+import com.kestalkayden.weepingcreeper.config.ModConfig;
+import com.kestalkayden.weepingcreeper.entity.WeepingCreeperEntities;
+import com.kestalkayden.weepingcreeper.entity.WeepingCreeperEntity;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
@@ -15,7 +15,7 @@ import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.monster.Creeper;
 
 public class WeepingCreeperFabric implements ModInitializer {
-    public static final String MOD_ID = "weepingcreeperlite";
+    public static final String MOD_ID = "weepingcreeper";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
     @Override

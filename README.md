@@ -32,7 +32,7 @@ Coming soon to Modrinth and CurseForge.
 
 ## Configuration
 
-Config file at `config/weepingcreeperlite.json` (created on first launch):
+Config file at `config/weepingcreeper.json` (created on first launch):
 
 ```json
 {
@@ -63,8 +63,8 @@ Edit the file and restart Minecraft (or the dedicated server) for changes to tak
 ```
 
 Produces:
-- `fabric/build/libs/weepingcreeperlite-fabric-<version>.jar`
-- `neoforge/build/libs/weepingcreeperlite-neoforge-<version>.jar`
+- `fabric/build/libs/weepingcreeper-fabric-<version>.jar`
+- `neoforge/build/libs/weepingcreeper-neoforge-<version>.jar`
 
 ## License
 

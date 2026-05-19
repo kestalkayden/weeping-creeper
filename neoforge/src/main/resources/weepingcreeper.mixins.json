@@ -1,6 +1,6 @@
 {
   "required": true,
-  "package": "com.kestalkayden.weepingcreeperlite.mixin",
+  "package": "com.kestalkayden.weepingcreeper.mixin",
   "compatibilityLevel": "JAVA_22",
   "minVersion": "0.8",
   "mixins": [

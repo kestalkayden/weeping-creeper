@@ -12,7 +12,7 @@ neoForge {
     validateAccessTransformers = false
 
     mods {
-        weepingcreeperlite {
+        weepingcreeper {
             sourceSet sourceSets.main
         }
     }

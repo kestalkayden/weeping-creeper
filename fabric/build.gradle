@@ -17,7 +17,7 @@ dependencies {
 
 loom {
     mods {
-        "weepingcreeperlite" {
+        "weepingcreeper" {
             sourceSet sourceSets.main
         }
     }

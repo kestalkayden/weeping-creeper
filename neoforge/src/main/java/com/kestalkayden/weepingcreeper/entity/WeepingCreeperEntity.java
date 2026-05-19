@@ -1,6 +1,6 @@
-package com.kestalkayden.weepingcreeperlite.entity;
+package com.kestalkayden.weepingcreeper.entity;
 
-import com.kestalkayden.weepingcreeperlite.config.ModConfig;
+import com.kestalkayden.weepingcreeper.config.ModConfig;
 
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
