@@ -12,6 +12,7 @@
     "sources": "https://github.com/kestalkayden/weeping-creeper"
   },
   "license": "CC0-1.0",
+  "icon": "assets/weepingcreeper/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [

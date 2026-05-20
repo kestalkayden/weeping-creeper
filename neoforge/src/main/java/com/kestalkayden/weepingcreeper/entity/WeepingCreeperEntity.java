@@ -1,7 +1,9 @@
 package com.kestalkayden.weepingcreeper.entity;
 
 import com.kestalkayden.weepingcreeper.config.ModConfig;
+import com.kestalkayden.weepingcreeper.mixin.CreeperAccessor;
 
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
@@ -27,6 +29,14 @@ import net.minecraft.world.phys.Vec3;
  *  See the mixin package for details. */
 public class WeepingCreeperEntity extends Creeper {
 
+    /** Gametime of the most recent heart particle. Used to throttle particles to
+     *  the configured interval. Initialized to 0 (not Long.MIN_VALUE — subtracting
+     *  that from a positive game time wraps to a negative number, which would fail
+     *  the interval check forever and suppress all hearts). Not persisted; resets
+     *  to 0 on chunk reload, which at worst causes one extra heart on first
+     *  observation after reload. */
+    private long lastHeartTick = 0L;
+
     public WeepingCreeperEntity(EntityType<? extends Creeper> type, Level level) {
         super(type, level);
     }
@@ -35,24 +45,69 @@ public class WeepingCreeperEntity extends Creeper {
         return Monster.createMonsterAttributes()
             .add(Attributes.MAX_HEALTH, 20.0)
             .add(Attributes.MOVEMENT_SPEED, ModConfig.get().movementSpeed)
-            .add(Attributes.FOLLOW_RANGE, 35.0);
+            .add(Attributes.FOLLOW_RANGE, ModConfig.get().followRange);
     }
 
     @Override
     protected void customServerAiStep(ServerLevel level) {
         if (isBeingObserved(level)) {
+            // Total freeze. Skipping super.customServerAiStep is not enough — by the
+            // time this method runs, Mob.serverAiStep has already ticked goals AND
+            // navigation, so the entity already advanced along its path this tick.
+            // Explicitly stop the active path and drop the attack target so the next
+            // goal tick doesn't immediately repath. Zero horizontal velocity for
+            // good measure (vertical preserved for gravity).
+            getNavigation().stop();
+            setTarget(null);
             setDeltaMovement(0.0, getDeltaMovement().y, 0.0);
+            // Hard-reset the swell fuse so a creeper that was mid-explosion when the
+            // player started observing doesn't still detonate. setSwellDir(-1) alone
+            // only decrements by 1 per tick — too slow when the player walks into
+            // melee range with the fuse already near max.
+            setSwellDir(-1);
+            ((CreeperAccessor) (Object) this).weeping$setSwell(0);
+            maybeSpawnHeartParticle(level);
             return;
         }
         super.customServerAiStep(level);
     }
 
+    /** Throttled heart particle spawn while observed — the "I see you seeing me"
+     *  cue. ServerLevel.sendParticles broadcasts to all nearby clients in one
+     *  call; no manual ranging needed. */
+    private void maybeSpawnHeartParticle(ServerLevel level) {
+        if (!ModConfig.get().heartParticlesEnabled) return;
+        long now = level.getGameTime();
+        if (now - lastHeartTick < ModConfig.get().heartIntervalTicks) return;
+        lastHeartTick = now;
+        level.sendParticles(ParticleTypes.HEART,
+            getX(), getY() + getBbHeight() + 0.3, getZ(),
+            1,
+            0.3, 0.0, 0.3,
+            0.0);
+    }
+
+    /** Tests whether any player on the server is currently looking at this creeper,
+     *  OR is within the proximity bubble (close-range safety net). Iteration is
+     *  bounded to a 64-block radius — the practical range a player could ever see
+     *  a mob within. Uses the creeper's bounding-box center (not its feet position)
+     *  as the look target, otherwise close-range checks fail when the player looks
+     *  horizontally and the eye-to-feet vector points sharply downward, falling
+     *  outside the front cone. */
     private boolean isBeingObserved(ServerLevel level) {
+        double proximitySq = ModConfig.get().proximityFreezeRadius * ModConfig.get().proximityFreezeRadius;
         double halfArcCos = Math.cos(Math.toRadians(ModConfig.get().lookArcDegrees / 2.0));
+        Vec3 creeperCenter = getBoundingBox().getCenter();
         for (Player player : level.players()) {
-            if (player.distanceToSqr(this) > 64.0 * 64.0) continue;
+            double distSq = player.distanceToSqr(this);
+            if (distSq > 64.0 * 64.0) continue;
+            // Proximity bubble: any close-enough player freezes the creeper regardless
+            // of look angle. Skip line-of-sight check too — at melee range we assume
+            // the player is aware of the creeper.
+            if (proximitySq > 0 && distSq <= proximitySq) return true;
+            // Look-cone + LOS check.
             Vec3 lookVec = player.getLookAngle();
-            Vec3 toCreeper = position().subtract(player.getEyePosition()).normalize();
+            Vec3 toCreeper = creeperCenter.subtract(player.getEyePosition()).normalize();
             if (lookVec.dot(toCreeper) < halfArcCos) continue;
             if (!player.hasLineOfSight(this)) continue;
             return true;

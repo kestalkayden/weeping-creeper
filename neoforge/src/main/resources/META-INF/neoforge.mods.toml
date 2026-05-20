@@ -12,6 +12,7 @@ Creepers that freeze when you look at them, move faster when you don't, and only
 '''
 authors="Kestalkayden"
 displayURL="https://github.com/kestalkayden/weeping-creeper"
+logoFile="assets/weepingcreeper/icon.png"
 
 [[mixins]]
 config="weepingcreeper.mixins.json"
