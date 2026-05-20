@@ -63,13 +63,13 @@ public final class ModConfig {
     public double tintBrightness = 0.55;
 
     /** Per-channel "drain green" factor for a statue-grey aesthetic. 0.0 = uniform
-     *  darken (just the tintBrightness multiplier). 1.0 = aggressively suppress the
-     *  green channel so vanilla creeper green pulls toward neutral grey. The default
-     *  0.25 is gentle — strong values shift near-grey pixels (eyes/mouth) toward
-     *  magenta, since reducing G more than R/B inverts the channel ratio on greys.
-     *  Most of the "statue feel" comes from tintBrightness; desaturation just adds
-     *  a touch of greying on top. */
-    public double desaturation = 0.25;
+     *  darken (just the tintBrightness multiplier). 1.0 = suppress the green
+     *  channel as far as the renderer allows. The default 0.10 is subtle — the
+     *  green-drain trick fundamentally creates magenta artifacts on non-green
+     *  pixels (eyes, mouth, light highlights), most visible on bright highlights
+     *  like the creeper's near-white shine pixels. Higher values increase the
+     *  statue effect AND the magenta artifact in proportion. */
+    public double desaturation = 0.10;
 
     /** Explosion radius for non-charged weeping creepers. Vanilla is 3.0. */
     public float explosionRadius = 3.0f;

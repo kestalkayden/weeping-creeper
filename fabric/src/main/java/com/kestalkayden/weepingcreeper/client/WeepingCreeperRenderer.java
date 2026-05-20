@@ -21,17 +21,17 @@ public class WeepingCreeperRenderer extends CreeperRenderer {
 
     /** Per-channel tint applied to every vertex when the model draws. Returned as
      *  packed ARGB. R and B are scaled uniformly by tintBrightness; G is scaled
-     *  more aggressively by tintBrightness × (1 − desaturation × 0.7) so that the
-     *  vanilla creeper's green-dominant skin drains toward neutral grey at high
-     *  desaturation. The 0.7 cap ensures G never collapses fully — even at
-     *  desaturation = 1 there's a faint green tint left, otherwise the creeper
-     *  looks magenta-tinted (R + B with no G). */
+     *  more aggressively by tintBrightness × (1 − desaturation × 0.5) so the
+     *  vanilla creeper's green skin drains toward grey at higher desaturation
+     *  values. The 0.5 coefficient caps how aggressive the green-drain can get
+     *  even at desat = 1 — keeps the magenta artifact on highlights bounded
+     *  rather than running away. */
     @Override
     protected int getModelTint(CreeperRenderState state) {
         double brightness = ModConfig.get().tintBrightness;
         double desat = ModConfig.get().desaturation;
         double rb = brightness;
-        double g = brightness * (1.0 - desat * 0.7);
+        double g = brightness * (1.0 - desat * 0.5);
         int rByte = clamp255(rb);
         int gByte = clamp255(g);
         int bByte = clamp255(rb);
