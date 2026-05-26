@@ -6,6 +6,7 @@ import com.kestalkayden.weepingcreeper.mixin.CreeperAccessor;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -13,6 +14,8 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Explosion;
+import net.minecraft.world.level.ExplosionDamageCalculator;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
@@ -36,6 +39,24 @@ public class WeepingCreeperEntity extends Creeper {
      *  to 0 on chunk reload, which at worst causes one extra heart on first
      *  observation after reload. */
     private long lastHeartTick = 0L;
+
+    /** Explosion damage calculator that damages nothing and applies no knockback.
+     *  The weeping creeper's blast is cosmetic; all damage comes from the manual
+     *  player-only pulse in {@link #explodeWeeping()}. Necessary because
+     *  {@code level().explode(..., NONE)} still runs the vanilla entity-damage pass —
+     *  {@code NONE} spares only blocks — which would otherwise destroy boats, item
+     *  frames, armor stands, mobs, etc. and double-hit players. */
+    private static final ExplosionDamageCalculator NO_ENTITY_DAMAGE = new ExplosionDamageCalculator() {
+        @Override
+        public boolean shouldDamageEntity(Explosion explosion, Entity entity) {
+            return false;
+        }
+
+        @Override
+        public float getKnockbackMultiplier(Entity entity) {
+            return 0.0F;
+        }
+    };
 
     public WeepingCreeperEntity(EntityType<? extends Creeper> type, Level level) {
         super(type, level);
@@ -120,10 +141,19 @@ public class WeepingCreeperEntity extends Creeper {
         float radius = isPowered() ? ModConfig.get().chargedExplosionRadius
                                    : ModConfig.get().explosionRadius;
 
+        // Cosmetic explosion only: particles + sound, no block damage (NONE) and no
+        // entity damage or knockback (NO_ENTITY_DAMAGE). ExplosionInteraction.NONE
+        // spares only *blocks*; the vanilla explosion still runs an entity-damage pass
+        // gated by the damage calculator, so the no-op calculator is what keeps boats,
+        // mobs, item frames, etc. unharmed. The manual pulse below is the sole damage
+        // source.
         level().explode(
             this,
+            null,
+            NO_ENTITY_DAMAGE,
             getX(), getY(), getZ() + getBbHeight() * 0.0625,
             radius,
+            false,
             Level.ExplosionInteraction.NONE);
 
         DamageSource source = damageSources().mobAttack(this);
@@ -132,7 +162,7 @@ public class WeepingCreeperEntity extends Creeper {
             double dist = p.distanceTo(this);
             if (dist > radius) continue;
             float falloff = (float) (1.0 - dist / radius);
-            float damage = radius * 7.0f * falloff;
+            float damage = (float) (radius * 7.0f * falloff * ModConfig.get().explosionDamageMultiplier);
             p.hurt(source, damage);
         }
 

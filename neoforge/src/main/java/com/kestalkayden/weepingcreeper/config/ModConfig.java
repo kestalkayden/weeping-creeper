@@ -77,6 +77,12 @@ public final class ModConfig {
     /** Explosion radius when struck by lightning (charged). Vanilla charged is 6.0. */
     public float chargedExplosionRadius = 6.0f;
 
+    /** Multiplier on player explosion damage. The base pulse is radius*7 with linear
+     *  falloff; 1.0 leaves it unchanged, 2.0 ≈ the pre-0.1.2 double-damage feel (when
+     *  the vanilla blast and the manual pulse both hit players). Default 1.25 is a
+     *  modest bump. Clamped to [0, 5]. */
+    public double explosionDamageMultiplier = 1.25;
+
     public static ModConfig get() { return INSTANCE; }
 
     public static void load(Path configDir) {
@@ -103,6 +109,7 @@ public final class ModConfig {
         INSTANCE.desaturation = Math.max(0.0, Math.min(1.0, INSTANCE.desaturation));
         INSTANCE.explosionRadius = Math.max(0.5f, Math.min(20.0f, INSTANCE.explosionRadius));
         INSTANCE.chargedExplosionRadius = Math.max(0.5f, Math.min(40.0f, INSTANCE.chargedExplosionRadius));
+        INSTANCE.explosionDamageMultiplier = Math.max(0.0, Math.min(5.0, INSTANCE.explosionDamageMultiplier));
     }
 
     private static void save(Path configDir) {

@@ -41,7 +41,8 @@ Config file at `config/weepingcreeper.json` (created on first launch):
   "lookArcDegrees": 120.0,
   "tearsEnabled": true,
   "explosionRadius": 3.0,
-  "chargedExplosionRadius": 6.0
+  "chargedExplosionRadius": 6.0,
+  "explosionDamageMultiplier": 1.25
 }
 ```
 
@@ -53,6 +54,7 @@ Config file at `config/weepingcreeper.json` (created on first launch):
 | `tearsEnabled` | `true` | bool | Cosmetic tears overlay on top of the creeper texture. |
 | `explosionRadius` | `3.0` | `0.5` – `20.0` | Base explosion radius. Vanilla creeper is `3.0`. |
 | `chargedExplosionRadius` | `6.0` | `0.5` – `40.0` | Explosion radius when struck by lightning. Vanilla charged is `6.0`. |
+| `explosionDamageMultiplier` | `1.25` | `0.0` – `5.0` | Scales player explosion damage. Base pulse is `radius × 7` with linear falloff; `1.0` = base, `2.0` ≈ the old (pre-fix) double-damage level. |
 
 Edit the file and restart Minecraft (or the dedicated server) for changes to take effect. The `tearsEnabled` toggle takes effect live without restart.
 
