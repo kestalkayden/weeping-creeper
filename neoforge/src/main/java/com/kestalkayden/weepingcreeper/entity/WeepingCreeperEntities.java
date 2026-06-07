@@ -21,6 +21,10 @@ public final class WeepingCreeperEntities {
             () -> EntityType.Builder.<WeepingCreeperEntity>of(WeepingCreeperEntity::new, MobCategory.MONSTER)
                 .sized(0.6f, 1.7f)
                 .clientTrackingRange(8)
+                // Despawn on Peaceful, matching vanilla creeper. In 26.1 this is a
+                // per-type flag (EntityType.isAllowedInPeaceful), not inherited from
+                // MobCategory.MONSTER — without it, weeping creepers persist on Peaceful.
+                .notInPeaceful()
                 .build(ResourceKey.create(Registries.ENTITY_TYPE,
                     Identifier.fromNamespaceAndPath(WeepingCreeperNeoForge.MOD_ID, "weeping_creeper")))
         );
