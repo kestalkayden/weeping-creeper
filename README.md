@@ -2,13 +2,13 @@
 
 Creepers that freeze when you look at them. Move faster when you don't. Only damage *you*, not your house, when they explode.
 
-A Weeping Angel × Creeper crossbreed for Minecraft 26.1.x on Fabric and NeoForge.
+A Weeping Angel × Creeper crossbreed for Minecraft 26.3 on Fabric and NeoForge.
 
 ## Requirements
 
-- Minecraft **26.1.x**
+- Minecraft **26.3**
 - Java **25**
-- Fabric Loader **0.18.4+** with **Fabric API**, *or* NeoForge **26.1+**
+- Fabric Loader **0.19.5+** with **Fabric API**, *or* NeoForge **26.3.0.7-beta+**
 
 ## Downloads
 

@@ -20,13 +20,13 @@ config="weepingcreeper.mixins.json"
 [[dependencies.weepingcreeper]]
 modId="neoforge"
 type="required"
-versionRange="[26.2.0.0-beta,)"
+versionRange="[26.3.0.7-beta,)"
 ordering="NONE"
 side="BOTH"
 
 [[dependencies.weepingcreeper]]
 modId="minecraft"
 type="required"
-versionRange="[26.2,26.3)"
+versionRange="[26.3,26.4)"
 ordering="NONE"
 side="BOTH"

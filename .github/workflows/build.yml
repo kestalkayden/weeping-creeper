@@ -142,7 +142,7 @@ jobs:
           files: fabric/build/libs/!(*-@(sources|javadoc)).jar
           loaders: fabric
           game-versions: |
-            26.2
+            26.3
           version-type: release
           game-version-filter: none
           java: 25
@@ -164,7 +164,7 @@ jobs:
           files: neoforge/build/libs/!(*-@(sources|javadoc)).jar
           loaders: neoforge
           game-versions: |
-            26.2
+            26.3
           version-type: release
           game-version-filter: none
           java: 25
@@ -202,7 +202,7 @@ jobs:
           files: fabric/build/libs/!(*-@(sources|javadoc)).jar
           loaders: fabric
           game-versions: |
-            26.2
+            26.3
           version-type: release
           game-version-filter: none
           java: 25
@@ -216,7 +216,7 @@ jobs:
           files: neoforge/build/libs/!(*-@(sources|javadoc)).jar
           loaders: neoforge
           game-versions: |
-            26.2
+            26.3
           version-type: release
           game-version-filter: none
           java: 25
